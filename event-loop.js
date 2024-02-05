@@ -2,18 +2,18 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 /****** 第一種 ******/
-// 2. 另外三個function都沒有放在callback function裏面,
-// 因此這三個函式都不是在 Event loop 裡面執行
-// 所以執行沒有特定的順序
 
+// 將Timer倒數計時並註冊他的callback
 setTimeout(() => console.log("Timer 1 finished"), 0);
+// 將Timer倒數計時並註冊他的callback
 setImmediate(() => console.log("Immediate 1 finished"));
 
+// 將他的callback排至 I/O polling queue
 fs.readFile("test-file.txt", () => {
   console.log("I/O finished");
 });
 
-// 1. 優先執行top level code
+// 優先執行top level code
 console.log("Hello from the top level code");
 
 /****** 第二種 ******/
