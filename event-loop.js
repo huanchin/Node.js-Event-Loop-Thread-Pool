@@ -2,9 +2,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 /****** 第一種 ******/
-
-// 1. 優先執行top level code
-// 2. 因為另外三個function都沒有放在callback function裏面,
+// 2. 另外三個function都沒有放在callback function裏面,
 // 因此這三個函式都不是在 Event loop 裡面執行
 // 所以執行沒有特定的順序
 
@@ -15,6 +13,7 @@ fs.readFile("test-file.txt", () => {
   console.log("I/O finished");
 });
 
+// 1. 優先執行top level code
 console.log("Hello from the top level code");
 
 /****** 第二種 ******/
